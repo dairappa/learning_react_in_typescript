@@ -31,7 +31,7 @@ const StarRating: React.FC<{ totalStars?: number, selectedStars?: number, onRate
                         <Star
                             key={index}
                             selected={selectedStars > index}
-                            onSelect={event => {
+                            onSelect={() => {
                                 onRate(index + 1)
                             }}
                         />)
