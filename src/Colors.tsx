@@ -1,9 +1,9 @@
-import React, {useContext} from "react";
+import React from "react";
 import Color from "./Color";
-import {ColorContext} from "./ColorProvider";
+import {useColors} from "./ColorProvider";
 
 const Colors: React.FC = () => {
-    const {colors, rateColor, removeColor} = useContext(ColorContext)
+    const {colors, rateColor, removeColor} = useColors()
     return colors.length ? (
         <>
             {

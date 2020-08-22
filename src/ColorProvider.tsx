@@ -1,9 +1,9 @@
-import React, {createContext, useState} from "react";
+import React, {createContext, useContext, useState} from "react";
 import {colorData} from "./data/color";
 import {ColorData} from "./ColorApp";
 import {v4} from "uuid";
 
-export const ColorContext = createContext<{
+const ColorContext = createContext<{
     colors: ColorData[],
     addColor: (title: string, color: string) => void,
     removeColor: (id: string) => void,
@@ -17,6 +17,8 @@ export const ColorContext = createContext<{
     rateColor: () => {
     }
 })
+
+export const useColors = () => useContext(ColorContext)
 
 export const ColorProvider: React.FC = ({children}) => {
     const [colors, setColors] = useState(colorData)
