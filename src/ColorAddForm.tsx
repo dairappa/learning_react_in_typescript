@@ -1,17 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useInput} from "./hooks/UseInput";
+import {ColorContext} from "./ColorProvider";
 
-const ColorAddForm: React.FC<{
-    onNewColor: (title: string, color: string) => void
-}> = ({onNewColor}) => {
+const ColorAddForm: React.FC = () => {
     const initialColor = "#000000";
     const [titleProps, resetTitle] = useInput("")
     const [colorProps, resetColor] = useInput(initialColor)
 
-
+    const {addColor} = useContext(ColorContext)
     const submit = (e: React.FormEvent) => {
         e.preventDefault()
-        onNewColor(titleProps.value, colorProps.value)
+        addColor(titleProps.value, colorProps.value)
         resetTitle()
         resetColor()
     }

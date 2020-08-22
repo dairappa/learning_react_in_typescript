@@ -1,17 +1,9 @@
-import React from "react";
-import {ColorData} from "./ColorApp";
+import React, {useContext} from "react";
 import Color from "./Color";
+import {ColorContext} from "./ColorProvider";
 
-const Colors: React.FC<{
-    colors: ColorData[],
-    onRemove?:(id:string) => void,
-    onRate?:(id:string, rate:number) => void
-}> = (
-    {
-        colors,
-        onRemove = () => {},
-        onRate = () => {}
-    }) => {
+const Colors: React.FC = () => {
+    const {colors, rateColor, removeColor} = useContext(ColorContext)
     return colors.length ? (
         <>
             {
@@ -20,10 +12,10 @@ const Colors: React.FC<{
                         key={i}
                         color={color}
                         onRate={(id, rate) => {
-                            onRate(id, rate)
+                            rateColor(id, rate)
                         }}
                         onRemove={id => {
-                            onRemove(id)
+                            removeColor(id)
                         }}
                     />
                 ))
