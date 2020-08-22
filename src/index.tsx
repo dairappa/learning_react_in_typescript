@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import ColorApp from "./ColorApp";
-import {ColorProvider} from "./ColorProvider";
+import {App} from "./App";
+import {BrowserRouter as Router} from "react-router-dom"
 
 
 ReactDOM.render(
     <React.StrictMode>
-        <ColorProvider>
-            <ColorApp/>
-        </ColorProvider>
+        <Router>
+            <App/>
+        </Router>
     </React.StrictMode>,
     document.getElementById('root')
 );
