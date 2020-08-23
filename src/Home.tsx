@@ -6,8 +6,10 @@ export const Home : React.FC = () => {
         <div>
             <h1>Learning React</h1>
             <nav>
-                <Link to="menu">Menu App</Link>
-                <Link to="color">Color App</Link>
+                <Link to="menu">Menu</Link>
+                <Link to="color">Color</Link>
+                <Link to="check">Check</Link>
+                <Link to="phrase">Phrase</Link>
             </nav>
         </div>
     )
