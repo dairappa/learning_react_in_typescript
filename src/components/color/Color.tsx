@@ -1,6 +1,6 @@
 import React from "react";
 import {ColorData} from "./ColorApp";
-import StarRating from "./StarRating";
+import StarRating from "../StarRating";
 import { FaTrash } from "react-icons/fa";
 
 const Color: React.FC<

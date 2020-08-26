@@ -1,5 +1,5 @@
 import React from "react";
-import {useInput} from "./hooks/UseInput";
+import {useInput} from "../../hooks/UseInput";
 import {useColors} from "./ColorProvider";
 
 const ColorAddForm: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRating from "./StarRating";
+import StarRating from "../StarRating";
 type Ingredient = {
     name: string,
     amount: number,
@@ -26,7 +26,7 @@ const Menu: React.FC<Menu> = (menu) => {
                 <ul>
                     {
                         menu.ingredients.map((ingredient, i) => (
-                            <li>
+                            <li key={i}>
                                 <p>{ingredient.name}</p>
                                 <p>{ingredient.amount} {ingredient.measurement}</p>
                             </li>
@@ -54,6 +54,7 @@ const Menu: React.FC<Menu> = (menu) => {
 const MenuApp: React.FC<{ title: string, recipes: Recipes }> = ({title, recipes}) => {
     return (
         <>
+            <h1>{title}</h1>
             {
                 recipes.map((recipe, i) => (
                     <Menu key={i} {...recipe} />

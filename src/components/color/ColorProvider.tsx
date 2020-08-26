@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useState} from "react";
-import {colorData} from "./data/color";
+import {colorData} from "../../data/color";
 import {ColorData} from "./ColorApp";
 import {v4} from "uuid";
 

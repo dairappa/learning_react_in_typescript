@@ -1,13 +1,13 @@
 import React from "react";
 import {Route} from "react-router-dom"
-import MenuApp from "./MenuApp";
+import MenuApp from "./components/menu/MenuApp";
 import {recipes} from "./data/recipe";
-import ColorApp from "./ColorApp";
-import {Home} from "./Home";
-import {ColorProvider} from "./ColorProvider";
-import {CheckboxApp} from "./CheckboxApp";
-import {Phrase} from "./Phrase";
-import {ForceRender} from "./ForceRender";
+import ColorApp from "./components/color/ColorApp";
+import {Home} from "./components/Home";
+import {ColorProvider} from "./components/color/ColorProvider";
+import {CheckboxApp} from "./components/checkbox/CheckboxApp";
+import {Phrase} from "./components/phrase/Phrase";
+import {ForceRender} from "./components/forceRender/ForceRender";
 
 export const App: React.FC = () => {
     return (

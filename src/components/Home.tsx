@@ -10,6 +10,7 @@ export const Home : React.FC = () => {
                 <Link to="color">Color</Link>
                 <Link to="check">Check</Link>
                 <Link to="phrase">Phrase</Link>
+                <Link to="forcerender">Force Render</Link>
             </nav>
         </div>
     )
