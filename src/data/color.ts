@@ -1,4 +1,4 @@
-import {ColorData} from "../ColorApp";
+import {ColorData} from "../components/color/ColorApp";
 
 export const colorData: ColorData[] = [
     {

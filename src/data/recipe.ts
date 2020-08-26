@@ -1,4 +1,4 @@
-import {Recipes} from "../MenuApp";
+import {Recipes} from "../components/menu/MenuApp";
 
 export const recipes: Recipes = [
     {
