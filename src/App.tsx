@@ -8,6 +8,8 @@ import {ColorProvider} from "./components/color/ColorProvider";
 import {CheckboxApp} from "./components/checkbox/CheckboxApp";
 import {Phrase} from "./components/phrase/Phrase";
 import {ForceRender} from "./components/forceRender/ForceRender";
+import {User} from "./components/User";
+import {GithubUser} from "./components/github/GithubUser";
 
 export const App: React.FC = () => {
     return (
@@ -40,8 +42,16 @@ export const App: React.FC = () => {
                 <Phrase/>
             </Route>
 
-            <Route path={"/forcerender"}>
+            <Route path="/forcerender">
                 <ForceRender />
+            </Route>
+
+            <Route path="/user">
+                <User />
+            </Route>
+
+            <Route path="/github">
+                <GithubUser login="moonhighway" />
             </Route>
         </div>
     )
