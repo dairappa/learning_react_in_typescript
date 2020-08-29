@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 
 export const GithubUser: React.FC<{ login: string }> = ({login}) => {
     const loadJSON = (key: string) => {
@@ -12,7 +12,6 @@ export const GithubUser: React.FC<{ login: string }> = ({login}) => {
     const [data, setData] = useState(
         loadJSON(`user:${login}`)
     )
-
 
     const [loading, setLoading] = useState(false)
 
@@ -30,7 +29,7 @@ export const GithubUser: React.FC<{ login: string }> = ({login}) => {
             avatar_url,
             location
         })
-    }, [data, login])
+    }, [login])
 
     useEffect(() => {
         (async () => {
@@ -49,7 +48,7 @@ export const GithubUser: React.FC<{ login: string }> = ({login}) => {
             }
 
         })()
-    }, [data, login])
+    }, [login])
 
     if (error) return <pre>{JSON.stringify(error)}</pre>
 
