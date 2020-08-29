@@ -9,9 +9,9 @@ export const GithubUser: React.FC<{ login: string }> = ({login}) => {
     const saveJSON = (key: string, data: any) =>
         key && localStorage.setItem(key, JSON.stringify(data))
 
-    const [data, setData] = useState(
-        loadJSON(`user:${login}`)
-    )
+    const initialData = useMemo(() => loadJSON(`user:${login}`), [login])
+
+    const [data, setData] = useState(initialData)
 
     const [loading, setLoading] = useState(false)
 
@@ -29,26 +29,26 @@ export const GithubUser: React.FC<{ login: string }> = ({login}) => {
             avatar_url,
             location
         })
-    }, [login])
+    }, [data, login])
 
     useEffect(() => {
         (async () => {
             if (!login) return
 
-            if (data && data.id && data.login === login) return
+            if (data && data.id && data.login.toLowerCase() === login.toLowerCase()) return
 
             try {
                 setLoading(true)
                 const response = await fetch(`https://api.github.com/users/${login}`);
-                const data = await response.json();
+                const json = await response.json();
                 setLoading(false)
-                setData(data)
+                setData(json)
             } catch (e) {
                 setError(e)
             }
 
         })()
-    }, [login])
+    }, [data, login])
 
     if (error) return <pre>{JSON.stringify(error)}</pre>
 
