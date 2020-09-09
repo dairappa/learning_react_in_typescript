@@ -10,6 +10,7 @@ import {Phrase} from "./components/phrase/Phrase";
 import {ForceRender} from "./components/forceRender/ForceRender";
 import {User} from "./components/User";
 import {GithubUser} from "./components/github/GithubUser";
+import {ListApp} from "./components/list/list";
 
 export const App: React.FC = () => {
     return (
@@ -52,6 +53,10 @@ export const App: React.FC = () => {
 
             <Route path="/github">
                 <GithubUser login="moonhighway" />
+            </Route>
+
+            <Route path="/list">
+                <ListApp/>
             </Route>
         </div>
     )

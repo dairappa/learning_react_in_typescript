@@ -11,6 +11,8 @@ export const Home : React.FC = () => {
                 <Link to="check">Check</Link>
                 <Link to="phrase">Phrase</Link>
                 <Link to="forcerender">Force Render</Link>
+                <Link to="github">Github</Link>
+                <Link to="List">List</Link>
             </nav>
         </div>
     )
