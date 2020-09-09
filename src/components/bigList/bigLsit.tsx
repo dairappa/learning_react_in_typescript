@@ -1,6 +1,6 @@
 import faker from "faker"
 import * as React from 'react';
-import {FixedSizeList} from "react-window";
+import {FixedSizeList, ListChildComponentProps} from "react-window";
 
 const bigList = [...Array(5000)].map(() => ({
     name: faker.name.findName(),
@@ -9,7 +9,7 @@ const bigList = [...Array(5000)].map(() => ({
 }))
 
 export const BigList: React.FC = () => {
-    const renderRow = ({index, style}: { index: number, style: React.CSSProperties }) => (
+    const renderRow = ({index, style}: ListChildComponentProps) => (
         <div style={{...style, ...{display: "flex"}}}>
             <img src={bigList[index].avatar} alt={bigList[index].name} width={50}/>
             <p>
