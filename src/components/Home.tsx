@@ -13,6 +13,7 @@ export const Home : React.FC = () => {
                 <Link to="forcerender">Force Render</Link>
                 <Link to="github">Github</Link>
                 <Link to="List">List</Link>
+                <Link to="bigList">BigList</Link>
             </nav>
         </div>
     )

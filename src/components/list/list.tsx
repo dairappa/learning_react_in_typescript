@@ -1,6 +1,6 @@
 import React from "react";
 
-const List = <T extends any>({data, renderEmpty, renderItem}: {
+export const List = <T extends any>({data, renderEmpty, renderItem}: {
     data: T[];
     renderItem: (source: T) => JSX.Element;
     renderEmpty: () => JSX.Element

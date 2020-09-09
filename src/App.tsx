@@ -11,6 +11,7 @@ import {ForceRender} from "./components/forceRender/ForceRender";
 import {User} from "./components/User";
 import {GithubUser} from "./components/github/GithubUser";
 import {ListApp} from "./components/list/list";
+import {BigList} from "./components/bigList/bigLsit";
 
 export const App: React.FC = () => {
     return (
@@ -44,19 +45,22 @@ export const App: React.FC = () => {
             </Route>
 
             <Route path="/forcerender">
-                <ForceRender />
+                <ForceRender/>
             </Route>
 
             <Route path="/user">
-                <User />
+                <User/>
             </Route>
 
             <Route path="/github">
-                <GithubUser login="moonhighway" />
+                <GithubUser login="moonhighway"/>
             </Route>
 
             <Route path="/list">
                 <ListApp/>
+            </Route>
+            <Route path="/bigList">
+                <BigList/>
             </Route>
         </div>
     )
