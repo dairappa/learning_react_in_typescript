@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo} from 'react';
+import {useFetch} from "../../hooks/UseFetch";
 
 export const GithubUser: React.FC<{ login: string }> = ({login}) => {
     const loadJSON = (key: string) => {
@@ -9,13 +10,11 @@ export const GithubUser: React.FC<{ login: string }> = ({login}) => {
     const saveJSON = (key: string, data: any) =>
         key && localStorage.setItem(key, JSON.stringify(data))
 
+    const [loading, data, error] = useFetch(`https://api.github.com/users/${login}`)
+
     const initialData = useMemo(() => loadJSON(`user:${login}`), [login])
 
-    const [data, setData] = useState(initialData)
-
-    const [loading, setLoading] = useState(false)
-
-    const [error, setError] = useState()
+    const drawData = data ?? initialData
 
     useEffect(() => {
         if (!data) return
@@ -31,32 +30,14 @@ export const GithubUser: React.FC<{ login: string }> = ({login}) => {
         })
     }, [data, login])
 
-    useEffect(() => {
-        (async () => {
-            if (!login) return
-
-            if (data && data.id && data.login.toLowerCase() === login.toLowerCase()) return
-
-            try {
-                setLoading(true)
-                const response = await fetch(`https://api.github.com/users/${login}`);
-                const json = await response.json();
-                setLoading(false)
-                setData(json)
-            } catch (e) {
-                setError(e)
-            }
-
-        })()
-    }, [data, login])
 
     if (error) return <pre>{JSON.stringify(error)}</pre>
 
-    if (!data) return null
+    if (!drawData) return null
 
     return (
         <>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
+            <pre>{JSON.stringify(drawData, null, 2)}</pre>
             {loading ? <h1>loading...</h1> : null}
         </>
     )
