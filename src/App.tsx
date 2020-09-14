@@ -9,7 +9,7 @@ import {CheckboxApp} from "./components/checkbox/CheckboxApp";
 import {Phrase} from "./components/phrase/Phrase";
 import {ForceRender} from "./components/forceRender/ForceRender";
 import {User} from "./components/User";
-import {GithubUser} from "./components/github/GithubUser";
+import {GithubUserApp} from "./components/github/GithubUser";
 import {ListApp} from "./components/list/list";
 import {BigList} from "./components/bigList/bigLsit";
 
@@ -53,7 +53,7 @@ export const App: React.FC = () => {
             </Route>
 
             <Route path="/github">
-                <GithubUser login="moonhighway"/>
+                <GithubUserApp />
             </Route>
 
             <Route path="/list">

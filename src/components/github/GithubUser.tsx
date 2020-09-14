@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {useEffect, useMemo} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {useFetch} from "../../hooks/UseFetch";
+import {useInput} from "../../hooks/UseInput";
 
-export const GithubUser: React.FC<{ login: string }> = ({login}) => {
+const GithubUser: React.FC<{ login: string }> = ({login}) => {
     const loadJSON = (key: string) => {
         const item = localStorage.getItem(key);
         return key && item && JSON.parse(item);
@@ -41,4 +42,25 @@ export const GithubUser: React.FC<{ login: string }> = ({login}) => {
             {loading ? <h1>loading...</h1> : null}
         </>
     )
+}
+
+export const GithubUserApp: React.FC = () => {
+    const initial = "moontahoe";
+    const [loginProps,] = useInput(initial)
+    const [login, setLogin] = useState(initial)
+
+
+    return (
+        <>
+            <input type="text" {...loginProps} />
+            <input value="Submit" type="button" onClick={
+                () => {
+                    setLogin(loginProps.value)
+                }}/>
+
+            <GithubUser login={login}/>
+        </>
+    )
+
+
 }
