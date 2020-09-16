@@ -21,9 +21,9 @@ export function useFetch(url: string){
 
     },[url])
 
-    return [
+    return {
         loading,
         data,
         error
-    ]
+    }
 }

@@ -2,7 +2,9 @@ import * as React from 'react';
 import {useEffect, useMemo, useState} from 'react';
 import {useFetch} from "../../hooks/UseFetch";
 import {useInput} from "../../hooks/UseInput";
+import {Fetch} from "../Fetch";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const GithubUser: React.FC<{ login: string }> = ({login}) => {
     const loadJSON = (key: string) => {
         const item = localStorage.getItem(key);
@@ -11,7 +13,7 @@ const GithubUser: React.FC<{ login: string }> = ({login}) => {
     const saveJSON = (key: string, data: any) =>
         key && localStorage.setItem(key, JSON.stringify(data))
 
-    const [loading, data, error] = useFetch(`https://api.github.com/users/${login}`)
+    const {loading, data, error} = useFetch(`https://api.github.com/users/${login}`)
 
     const initialData = useMemo(() => loadJSON(`user:${login}`), [login])
 
@@ -44,6 +46,29 @@ const GithubUser: React.FC<{ login: string }> = ({login}) => {
     )
 }
 
+const UserDetails: React.FC<{ data: any }> = ({data}) => {
+    return (
+        <div className="githubUser">
+            <img src={data.avatar_url} alt={data.login} style={{width: 200}}/>
+            <div>
+                <h1>{data.login}</h1>
+                {data.name && <p>{data.name}</p>}
+                {data.location && <p>{data.location}</p>}
+            </div>
+        </div>
+    )
+}
+
+const GithubUserUsingFetchComponent: React.FC<{ login: string }> = ({login}) => {
+    return (
+        <>
+            <Fetch uri={`https://api.github.com/users/${login}`}
+                   renderSuccess={data => (<UserDetails data={data}/>)}
+            />
+        </>
+    )
+}
+
 export const GithubUserApp: React.FC = () => {
     const initial = "moontahoe";
     const [loginProps,] = useInput(initial)
@@ -58,7 +83,7 @@ export const GithubUserApp: React.FC = () => {
                     setLogin(loginProps.value)
                 }}/>
 
-            <GithubUser login={login}/>
+            <GithubUserUsingFetchComponent login={login}/>
         </>
     )
 
