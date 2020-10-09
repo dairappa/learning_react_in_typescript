@@ -1,10 +1,12 @@
 import * as React from 'react';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useFetch} from "../../hooks/UseFetch";
 import {useInput} from "../../hooks/UseInput";
 import {Fetch} from "../Fetch";
 import {useIterator} from "../../hooks/UseIterator";
 import ReactMarkdown from "react-markdown";
+import {log} from "util";
+import {useMountRef} from "../../hooks/UseMountRef";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const GithubUser: React.FC<{ login: string }> = ({login}) => {
@@ -57,9 +59,7 @@ const UserDetails: React.FC<{ data: any }> = ({data}) => {
                 {data.name && <p>{data.name}</p>}
                 {data.location && <p>{data.location}</p>}
             </div>
-            <UserRepositories
-                login={data.login}
-                onSelect={repoName => console.log(`${repoName} selected`)}/>
+
         </div>
     )
 }
@@ -83,7 +83,6 @@ const RepoMenu: React.FC<{
                 <p>{current?.name}</p>
                 <button onClick={next}>&gt;</button>
             </div>
-            <RepositoryReadme repo={current?.name} login={login} />
         </>
     )
 }
@@ -117,14 +116,19 @@ const RepositoryReadme: React.FC<{ repo: string, login: string }> = ({repo, logi
     const [error, setError] = useState()
     const [markdown, setMarkdown] = useState("")
 
+    const mounted = useMountRef()
+
     const loadReadme = useCallback(async (login, repo) => {
         setLoading(true)
         const uri = `https://api.github.com/repos/${login}/${repo}/readme`
         const {download_url} = await fetch(uri).then(res => res.json())
 
         const markdown = await fetch(download_url).then(res => res.text())
-        setMarkdown(markdown)
-        setLoading(false)
+        if(mounted.current){
+            setMarkdown(markdown)
+            setLoading(false)
+        }
+
     }, [])
 
     useEffect(() => {
@@ -141,9 +145,15 @@ const RepositoryReadme: React.FC<{ repo: string, login: string }> = ({repo, logi
 }
 
 export const GithubUserApp: React.FC = () => {
-    const initial = "moontahoe";
-    const [loginProps,] = useInput(initial)
-    const [login, setLogin] = useState(initial)
+    const [loginProps,] = useInput("")
+    const [login, setLogin] = useState("")
+    const [repo, setRepo] = useState("")
+
+    const handleSearch = (login: string): void => {
+        if(login) return setLogin(login)
+
+        setLogin("")
+    }
 
     return (
         <>
@@ -153,7 +163,11 @@ export const GithubUserApp: React.FC = () => {
                     setLogin(loginProps.value)
                 }}/>
 
-            <GithubUserUsingFetchComponent login={login}/>
+            {login && <GithubUserUsingFetchComponent login={login}/>}
+            {login && <UserRepositories
+                login={login}
+                onSelect={repoName => setRepo(repoName)}/>}
+            {login && repo && <RepositoryReadme repo={repo} login={login} />}
         </>
     )
 
